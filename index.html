@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <!-- Nada sai do aparelho: sem fetch, sem CDN, sem analytics. -->
+  <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self'; connect-src 'none'; worker-src 'self'; manifest-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <meta name="referrer" content="no-referrer">
+  <meta name="theme-color" content="#0f5f55">
+  <meta name="description" content="Transforma o Pix copia e cola em arquivo .txt para abrir no WhatsApp Web.">
+  <title>Pix para TXT</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icons/icon-192.png" type="image/png">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topo">
+    <h1>Pix para TXT</h1>
+    <p>Gera um arquivo .txt com o Pix copia e cola para abrir no WhatsApp Web.</p>
+  </header>
+
+  <nav class="abas" role="tablist">
+    <button type="button" role="tab" id="aba-novo" aria-selected="true" aria-controls="painel-novo">Novo</button>
+    <button type="button" role="tab" id="aba-historico" aria-selected="false" aria-controls="painel-historico">Histórico <span id="qtd-historico" class="contador">0</span></button>
+  </nav>
+
+  <main>
+    <section id="painel-novo" role="tabpanel" aria-labelledby="aba-novo">
+      <label for="codigo" class="rotulo">Código Pix (copia e cola)</label>
+      <textarea id="codigo" rows="5" spellcheck="false" autocomplete="off" autocapitalize="off"
+                placeholder="Cole aqui o código que começa com 000201…"></textarea>
+      <div class="linha-botoes">
+        <button type="button" id="btn-colar" class="secundario">Colar</button>
+        <button type="button" id="btn-limpar" class="secundario">Limpar</button>
+      </div>
+
+      <label for="descricao" class="rotulo">Descrição (opcional)</label>
+      <input id="descricao" type="text" maxlength="60" autocomplete="off" placeholder="Ex.: FGTS outubro/2026">
+
+      <div id="mensagem" class="mensagem" hidden></div>
+
+      <div id="resumo" class="cartao" hidden>
+        <dl id="resumo-campos"></dl>
+      </div>
+
+      <div id="aviso-duplicado" class="mensagem alerta" hidden></div>
+
+      <button type="button" id="btn-adicionar" class="secundario largo" disabled>+ Adicionar à lista e colar outro</button>
+
+      <div id="bloco-lista" class="cartao lista-envio" hidden>
+        <div class="lista-envio-topo">
+          <strong>Neste arquivo: <span id="qtd-lista">0</span> Pix</strong>
+          <button type="button" id="btn-esvaziar" class="link">Esvaziar</button>
+        </div>
+        <ul id="lista-envio" class="lista-envio-itens"></ul>
+      </div>
+
+      <button type="button" id="btn-enviar" class="primario" disabled>Gerar TXT e compartilhar</button>
+    </section>
+
+    <section id="painel-historico" role="tabpanel" aria-labelledby="aba-historico" hidden>
+      <input id="filtro" type="search" autocomplete="off" placeholder="Buscar por descrição, recebedor ou valor">
+      <ul id="lista-historico" class="lista"></ul>
+      <p id="historico-vazio" class="vazio">Nenhum Pix enviado ainda.</p>
+      <button type="button" id="btn-apagar-tudo" class="perigo" hidden>Apagar todo o histórico</button>
+    </section>
+  </main>
+
+  <footer class="rodape">
+    O histórico fica só neste celular. Nenhum dado é enviado para a internet.
+    <span id="versao"></span>
+  </footer>
+
+  <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+
+  <script src="pix.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
