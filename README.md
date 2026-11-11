@@ -46,10 +46,11 @@ no computador.
 ## Publicar no GitHub Pages
 
 1. Em github.com, crie um repositório **público** chamado `pix-para-txt`.
-2. Clique em **Add file → Upload files** e envie o conteúdo desta pasta,
-   **incluindo a pasta `icons`**:
+2. Clique em **Add file → Upload files** e envie os 11 arquivos desta pasta
+   (todos ficam na raiz, sem subpasta):
    `index.html`, `app.js`, `pix.js`, `style.css`, `sw.js`,
-   `manifest.webmanifest`, `icons/`, `README.md`, `.gitignore`.
+   `manifest.webmanifest`, `icon-192.png`, `icon-512.png`, `maskable-512.png`,
+   `README.md`, `.gitignore`.
 3. Em **Settings → Pages**: *Source* = **Deploy from a branch**,
    *Branch* = `main`, pasta `/ (root)` → **Save**.
 4. Em 1 a 2 minutos o app fica em `https://<usuario>.github.io/pix-para-txt/`.
